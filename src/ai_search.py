@@ -10,6 +10,7 @@ from azure.search.documents.models import (
 )
 from azure_config import AzureConfig 
 from azure.identity import DefaultAzureCredential
+#from azure.core.credentials import AzureKeyCredential
 
 # Initialize AzureConfig
 azure_config = AzureConfig()
@@ -24,6 +25,7 @@ def retrieve_documentation(
         endpoint=azure_config.search_endpoint,
         index_name=index_name,
         credential=DefaultAzureCredential()
+        #credential=AzureKeyCredential("4GgJKPjUyqinwfWx7WWfb8hpmkvUDrtIDtWwBVHgMLAzSeBrIDB8")
     )
 
     vector_query = VectorizedQuery(
