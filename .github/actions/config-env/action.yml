@@ -73,7 +73,6 @@ runs:
         for roleId in "${roles[@]}"; do
         az role assignment create \
           --assignee-object-id "$principalId" \
-          --assignee-principal-type "ServicePrincipal" \
           --role "$roleId" \
           --scope "$scope"
         done
