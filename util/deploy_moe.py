@@ -74,11 +74,11 @@ def deploy_flow(endpoint_name, deployment_name):
     deployment = ManagedOnlineDeployment(
         name=deployment_name,
         endpoint_name=endpoint_name,
-        model=Model(
-            name="ragflow",
-            path=flow_path,  # path to promptflow folder
-            properties=[ # this enables the chat interface in the endpoint test tab
-                ["azureml.promptflow.source_flow_id", "ragflow"],
+        model = Model(
+            name="ragwithtrace",
+            path=flow_path,  # path to the promptflow folder
+            properties=[  # enables the chat interface in the endpoint test tab
+                ["azureml.promptflow.source_flow_id", "ragwithtrace"],
                 ["azureml.promptflow.mode", "chat"],
                 ["azureml.promptflow.chat_input", "question"],
                 ["azureml.promptflow.chat_output", "answer"]
@@ -109,6 +109,9 @@ def deploy_flow(endpoint_name, deployment_name):
         instance_type="Standard_DS3_v2",
         instance_count=1,
         environment_variables={
+            "AZURE_CLIENT_ID": "d625c3c9-c400-4ad2-95b8-4b528ea1cdb5",
+            "AZURE_CLIENT_SECRET": "Bei8Q~prwO3g_gVSoX18bYv32AIzmzwOZy91Gdon",
+            "AZURE_TENANT_ID": "146fb039-e056-4cd5-9b36-b8c1dc6eb81a",
             "PRT_CONFIG_OVERRIDE": f"deployment.subscription_id={client.subscription_id},deployment.resource_group={client.resource_group_name},deployment.workspace_name={client.workspace_name},deployment.endpoint_name={endpoint_name},deployment.deployment_name={deployment_name}",
             "AZURE_SUBSCRIPTION_ID": os.environ["AZURE_SUBSCRIPTION_ID"],
             "AZURE_RESOURCE_GROUP": os.environ["AZURE_RESOURCE_GROUP"],
